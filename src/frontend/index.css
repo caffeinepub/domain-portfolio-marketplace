@@ -248,15 +248,14 @@
       inset 0 0 12px oklch(0.80 0.30 350 / 0.05);
   }
 
-  /* ── Silver neon ── */
+  /* ── White embossed (no glow) ── */
   .neon-text-silver {
-    color: var(--neon-silver);
+    color: #ffffff;
     text-shadow:
-      0 0 4px #fff,
-      0 0 10px var(--neon-silver-glow),
-      0 0 22px var(--neon-silver),
-      0 0 48px oklch(0.92 0.005 220 / 0.55),
-      0 0 90px oklch(0.92 0.005 220 / 0.25);
+      1px 1px 0px oklch(0.06 0.005 230),
+      2px 2px 0px oklch(0.04 0.003 230),
+      3px 3px 2px oklch(0.02 0.002 230 / 0.8),
+      -1px -1px 0px oklch(0.30 0.02 220 / 0.5);
   }
 
   .neon-border-silver {
@@ -268,27 +267,20 @@
       inset 0 0 14px oklch(0.92 0.005 220 / 0.07);
   }
 
-  /* Silver shimmer animation for text */
-  @keyframes silver-shimmer {
-    0%, 100% {
-      text-shadow:
-        0 0 4px #fff,
-        0 0 10px var(--neon-silver-glow),
-        0 0 22px var(--neon-silver),
-        0 0 48px oklch(0.92 0.005 220 / 0.55);
-    }
-    50% {
-      text-shadow:
-        0 0 6px #fff,
-        0 0 18px var(--neon-silver-glow),
-        0 0 36px var(--neon-silver),
-        0 0 70px oklch(0.96 0.008 220 / 0.75),
-        0 0 100px oklch(0.92 0.005 220 / 0.35);
-    }
+  /* Silver shimmer animation for text (disabled - white no-glow mode) */
+  .animate-silver-shimmer {
+    /* No animation - clean white embossed */
   }
 
-  .animate-silver-shimmer {
-    animation: silver-shimmer 2.2s ease-in-out infinite;
+  /* Embossed 3D raised text effect */
+  .emboss-text {
+    text-shadow:
+      1px 1px 0px oklch(0.06 0.005 230),
+      2px 2px 0px oklch(0.05 0.003 230),
+      3px 3px 0px oklch(0.04 0.002 230),
+      4px 4px 3px oklch(0.02 0 0 / 0.7),
+      -1px -1px 0px oklch(0.40 0.01 220 / 0.6),
+      -0.5px -0.5px 0px rgba(255,255,255,0.15);
   }
 
   /* Silver ring glow animation around card */

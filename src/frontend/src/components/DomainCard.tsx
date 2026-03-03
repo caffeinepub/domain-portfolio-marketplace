@@ -185,7 +185,7 @@ export function DomainCard({ domain, index, neonStyle }: DomainCardProps) {
 
         {/* Domain Name — larger, dominant — always silver */}
         <div className="flex flex-col gap-1.5">
-          <h3 className="font-display font-black text-2xl md:text-3xl lg:text-4xl leading-tight break-all neon-text-silver animate-silver-shimmer">
+          <h3 className="font-display font-black text-2xl md:text-3xl lg:text-4xl leading-tight break-all neon-text-silver emboss-text">
             {domain.name}
           </h3>
 
@@ -206,7 +206,7 @@ export function DomainCard({ domain, index, neonStyle }: DomainCardProps) {
               className="w-5 h-5 flex-shrink-0"
               style={{ color: "var(--neon-silver)", opacity: 0.75 }}
             />
-            <span className="font-display font-extrabold text-3xl md:text-4xl tracking-tight neon-text-silver animate-silver-shimmer">
+            <span className="font-display font-extrabold text-3xl md:text-4xl tracking-tight neon-text-silver emboss-text">
               ${domain.price.toLocaleString()}
             </span>
           </div>
