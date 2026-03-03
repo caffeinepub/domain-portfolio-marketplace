@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ─────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora[wght].woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Cyberpunk Dark Palette */
+    --background: 0.04 0 0;
+    --foreground: 0.96 0.01 200;
+
+    --card: 0.08 0.005 230;
+    --card-foreground: 0.96 0.01 200;
+
+    --popover: 0.06 0.005 230;
+    --popover-foreground: 0.96 0.01 200;
+
+    --primary: 0.82 0.28 195;
+    --primary-foreground: 0.04 0.01 230;
+
+    --secondary: 0.12 0.01 240;
+    --secondary-foreground: 0.82 0.28 195;
+
+    --muted: 0.10 0.005 230;
+    --muted-foreground: 0.55 0.05 220;
+
+    --accent: 0.75 0.28 330;
+    --accent-foreground: 0.04 0 0;
+
+    --destructive: 0.65 0.29 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.22 0.04 230;
+    --input: 0.14 0.02 230;
+    --ring: 0.82 0.28 195;
+
+    /* Chart (neon palette) */
+    --chart-1: 0.82 0.28 195;
+    --chart-2: 0.75 0.28 330;
+    --chart-3: 0.85 0.32 135;
+    --chart-4: 0.80 0.26 280;
+    --chart-5: 0.88 0.22 60;
+
+    /* Sidebar */
+    --sidebar: 0.06 0.005 230;
+    --sidebar-foreground: 0.96 0.01 200;
+    --sidebar-primary: 0.82 0.28 195;
+    --sidebar-primary-foreground: 0.04 0 0;
+    --sidebar-accent: 0.12 0.01 240;
+    --sidebar-accent-foreground: 0.82 0.28 195;
+    --sidebar-border: 0.22 0.04 230;
+    --sidebar-ring: 0.82 0.28 195;
+
+    /* Neon colors */
+    --neon-cyan: oklch(0.82 0.28 195);
+    --neon-magenta: oklch(0.75 0.28 330);
+    --neon-lime: oklch(0.85 0.32 135);
+    --neon-violet: oklch(0.72 0.26 280);
+    --neon-amber: oklch(0.88 0.22 60);
+    --neon-blue: oklch(0.70 0.24 255);
+    --neon-red: oklch(0.70 0.29 25);
+    --neon-teal: oklch(0.80 0.25 175);
+    --neon-pink: oklch(0.80 0.30 350);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Sora", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* ─── Neon glow utilities ─────────────────────────────────── */
+@layer utilities {
+  .neon-text-cyan {
+    color: var(--neon-cyan);
+    text-shadow:
+      0 0 6px var(--neon-cyan),
+      0 0 20px var(--neon-cyan),
+      0 0 40px var(--neon-cyan),
+      0 0 80px oklch(0.82 0.28 195 / 0.5);
+  }
+  .neon-text-magenta {
+    color: var(--neon-magenta);
+    text-shadow:
+      0 0 6px var(--neon-magenta),
+      0 0 20px var(--neon-magenta),
+      0 0 40px var(--neon-magenta),
+      0 0 80px oklch(0.75 0.28 330 / 0.5);
+  }
+  .neon-text-lime {
+    color: var(--neon-lime);
+    text-shadow:
+      0 0 6px var(--neon-lime),
+      0 0 20px var(--neon-lime),
+      0 0 40px var(--neon-lime),
+      0 0 80px oklch(0.85 0.32 135 / 0.5);
+  }
+  .neon-text-violet {
+    color: var(--neon-violet);
+    text-shadow:
+      0 0 6px var(--neon-violet),
+      0 0 20px var(--neon-violet),
+      0 0 40px var(--neon-violet),
+      0 0 80px oklch(0.72 0.26 280 / 0.5);
+  }
+  .neon-text-amber {
+    color: var(--neon-amber);
+    text-shadow:
+      0 0 6px var(--neon-amber),
+      0 0 20px var(--neon-amber),
+      0 0 40px var(--neon-amber),
+      0 0 80px oklch(0.88 0.22 60 / 0.5);
+  }
+  .neon-text-blue {
+    color: var(--neon-blue);
+    text-shadow:
+      0 0 6px var(--neon-blue),
+      0 0 20px var(--neon-blue),
+      0 0 40px var(--neon-blue),
+      0 0 80px oklch(0.70 0.24 255 / 0.5);
+  }
+  .neon-text-red {
+    color: var(--neon-red);
+    text-shadow:
+      0 0 6px var(--neon-red),
+      0 0 20px var(--neon-red),
+      0 0 40px var(--neon-red),
+      0 0 80px oklch(0.70 0.29 25 / 0.5);
+  }
+  .neon-text-teal {
+    color: var(--neon-teal);
+    text-shadow:
+      0 0 6px var(--neon-teal),
+      0 0 20px var(--neon-teal),
+      0 0 40px var(--neon-teal),
+      0 0 80px oklch(0.80 0.25 175 / 0.5);
+  }
+  .neon-text-pink {
+    color: var(--neon-pink);
+    text-shadow:
+      0 0 6px var(--neon-pink),
+      0 0 20px var(--neon-pink),
+      0 0 40px var(--neon-pink),
+      0 0 80px oklch(0.80 0.30 350 / 0.5);
+  }
+
+  .neon-border-cyan {
+    border-color: var(--neon-cyan);
+    box-shadow:
+      0 0 8px var(--neon-cyan),
+      0 0 20px oklch(0.82 0.28 195 / 0.4),
+      inset 0 0 12px oklch(0.82 0.28 195 / 0.05);
+  }
+  .neon-border-magenta {
+    border-color: var(--neon-magenta);
+    box-shadow:
+      0 0 8px var(--neon-magenta),
+      0 0 20px oklch(0.75 0.28 330 / 0.4),
+      inset 0 0 12px oklch(0.75 0.28 330 / 0.05);
+  }
+  .neon-border-lime {
+    border-color: var(--neon-lime);
+    box-shadow:
+      0 0 8px var(--neon-lime),
+      0 0 20px oklch(0.85 0.32 135 / 0.4),
+      inset 0 0 12px oklch(0.85 0.32 135 / 0.05);
+  }
+  .neon-border-violet {
+    border-color: var(--neon-violet);
+    box-shadow:
+      0 0 8px var(--neon-violet),
+      0 0 20px oklch(0.72 0.26 280 / 0.4),
+      inset 0 0 12px oklch(0.72 0.26 280 / 0.05);
+  }
+  .neon-border-amber {
+    border-color: var(--neon-amber);
+    box-shadow:
+      0 0 8px var(--neon-amber),
+      0 0 20px oklch(0.88 0.22 60 / 0.4),
+      inset 0 0 12px oklch(0.88 0.22 60 / 0.05);
+  }
+  .neon-border-blue {
+    border-color: var(--neon-blue);
+    box-shadow:
+      0 0 8px var(--neon-blue),
+      0 0 20px oklch(0.70 0.24 255 / 0.4),
+      inset 0 0 12px oklch(0.70 0.24 255 / 0.05);
+  }
+  .neon-border-red {
+    border-color: var(--neon-red);
+    box-shadow:
+      0 0 8px var(--neon-red),
+      0 0 20px oklch(0.70 0.29 25 / 0.4),
+      inset 0 0 12px oklch(0.70 0.29 25 / 0.05);
+  }
+  .neon-border-teal {
+    border-color: var(--neon-teal);
+    box-shadow:
+      0 0 8px var(--neon-teal),
+      0 0 20px oklch(0.80 0.25 175 / 0.4),
+      inset 0 0 12px oklch(0.80 0.25 175 / 0.05);
+  }
+  .neon-border-pink {
+    border-color: var(--neon-pink);
+    box-shadow:
+      0 0 8px var(--neon-pink),
+      0 0 20px oklch(0.80 0.30 350 / 0.4),
+      inset 0 0 12px oklch(0.80 0.30 350 / 0.05);
+  }
+
+  .card-raised {
+    background: linear-gradient(
+      145deg,
+      oklch(0.10 0.008 230) 0%,
+      oklch(0.07 0.005 230) 50%,
+      oklch(0.09 0.007 240) 100%
+    );
+    transform: perspective(800px) translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-raised:hover {
+    transform: perspective(800px) translateZ(12px) translateY(-4px);
+  }
+
+  .font-display {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  .font-mono-code {
+    font-family: "Geist Mono", monospace;
+  }
+}
+
+/* ─── Particle canvas ─────────────────────────────────────── */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Neon pulse animation ────────────────────────────────── */
+@keyframes neon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes rotate-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2.5s ease-in-out infinite;
+}
+
+.animate-float-up {
+  animation: float-up 0.6s ease-out forwards;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.06 0.005 230);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.06 230);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.82 0.28 195);
+}
