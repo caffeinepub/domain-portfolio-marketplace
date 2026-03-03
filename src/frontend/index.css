@@ -87,6 +87,9 @@
     --neon-red: oklch(0.70 0.29 25);
     --neon-teal: oklch(0.80 0.25 175);
     --neon-pink: oklch(0.80 0.30 350);
+    /* Silver */
+    --neon-silver: oklch(0.92 0.005 220);
+    --neon-silver-glow: oklch(0.96 0.008 220);
   }
 
   * {
@@ -245,6 +248,72 @@
       inset 0 0 12px oklch(0.80 0.30 350 / 0.05);
   }
 
+  /* ── Silver neon ── */
+  .neon-text-silver {
+    color: var(--neon-silver);
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px var(--neon-silver-glow),
+      0 0 22px var(--neon-silver),
+      0 0 48px oklch(0.92 0.005 220 / 0.55),
+      0 0 90px oklch(0.92 0.005 220 / 0.25);
+  }
+
+  .neon-border-silver {
+    border-color: oklch(0.85 0.006 220);
+    box-shadow:
+      0 0 6px oklch(0.96 0.008 220 / 0.9),
+      0 0 16px oklch(0.92 0.005 220 / 0.6),
+      0 0 36px oklch(0.88 0.006 220 / 0.3),
+      inset 0 0 14px oklch(0.92 0.005 220 / 0.07);
+  }
+
+  /* Silver shimmer animation for text */
+  @keyframes silver-shimmer {
+    0%, 100% {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 10px var(--neon-silver-glow),
+        0 0 22px var(--neon-silver),
+        0 0 48px oklch(0.92 0.005 220 / 0.55);
+    }
+    50% {
+      text-shadow:
+        0 0 6px #fff,
+        0 0 18px var(--neon-silver-glow),
+        0 0 36px var(--neon-silver),
+        0 0 70px oklch(0.96 0.008 220 / 0.75),
+        0 0 100px oklch(0.92 0.005 220 / 0.35);
+    }
+  }
+
+  .animate-silver-shimmer {
+    animation: silver-shimmer 2.2s ease-in-out infinite;
+  }
+
+  /* Silver ring glow animation around card */
+  @keyframes silver-ring-glow {
+    0%, 100% {
+      box-shadow:
+        0 0 6px oklch(0.96 0.008 220 / 0.9),
+        0 0 18px oklch(0.92 0.005 220 / 0.6),
+        0 0 40px oklch(0.88 0.006 220 / 0.3),
+        inset 0 0 14px oklch(0.92 0.005 220 / 0.07);
+    }
+    50% {
+      box-shadow:
+        0 0 10px oklch(1 0 0 / 0.95),
+        0 0 28px oklch(0.96 0.008 220 / 0.85),
+        0 0 60px oklch(0.92 0.005 220 / 0.5),
+        0 0 100px oklch(0.88 0.006 220 / 0.2),
+        inset 0 0 20px oklch(0.92 0.005 220 / 0.1);
+    }
+  }
+
+  .animate-silver-ring {
+    animation: silver-ring-glow 2.8s ease-in-out infinite;
+  }
+
   .card-raised {
     background: linear-gradient(
       145deg,
@@ -301,6 +370,47 @@
 
 .animate-float-up {
   animation: float-up 0.6s ease-out forwards;
+}
+
+/* ─── Hype badge animation ───────────────────────────────── */
+@keyframes hype-badge-pulse {
+  0%, 100% {
+    box-shadow: 0 0 6px oklch(0.88 0.22 60 / 0.4), 0 0 12px oklch(0.88 0.22 60 / 0.2);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 12px oklch(0.88 0.22 60 / 0.8), 0 0 24px oklch(0.88 0.22 60 / 0.5), 0 0 40px oklch(0.88 0.22 60 / 0.2);
+    opacity: 0.85;
+  }
+}
+
+/* ─── Search button ring spin animations ─────────────────── */
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-ring-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ─── Domain card highlight flash ────────────────────────── */
+@keyframes domain-highlight {
+  0% { box-shadow: 0 0 0 2px oklch(0.82 0.28 195), 0 0 30px oklch(0.82 0.28 195 / 0.8), 0 0 60px oklch(0.82 0.28 195 / 0.4); }
+  50% { box-shadow: 0 0 0 4px oklch(0.82 0.28 195), 0 0 60px oklch(0.82 0.28 195 / 1), 0 0 120px oklch(0.82 0.28 195 / 0.6); }
+  100% { box-shadow: 0 0 0 2px oklch(0.82 0.28 195), 0 0 30px oklch(0.82 0.28 195 / 0.8), 0 0 60px oklch(0.82 0.28 195 / 0.4); }
+}
+
+.domain-highlight-flash {
+  animation: domain-highlight 0.5s ease-in-out 3;
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 3px;
 }
 
 /* ─── Scrollbar ───────────────────────────────────────────── */

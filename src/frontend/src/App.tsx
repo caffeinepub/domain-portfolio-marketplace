@@ -4,6 +4,7 @@ import { ExternalLink, Globe2, Zap } from "lucide-react";
 import { motion } from "motion/react";
 import { DomainCard, NEON_STYLES } from "./components/DomainCard";
 import { ParticleBackground } from "./components/ParticleBackground";
+import { SearchBar } from "./components/SearchBar";
 import { useGetDomains } from "./hooks/useQueries";
 
 // Fallback domains in case backend isn't seeded yet
@@ -235,7 +236,7 @@ export default function App() {
               className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-border text-xs font-mono-code text-muted-foreground"
             >
               <Zap className="w-3 h-3 neon-text-amber" />
-              Premium Domain Portfolio — Available Now
+              Premium Domains For Sale — Available Now
             </motion.div>
 
             <motion.h1
@@ -248,7 +249,7 @@ export default function App() {
               <br />
               <span className="text-foreground">Domain</span>
               <br />
-              <span className="neon-text-magenta">Portfolio</span>
+              <span className="neon-text-magenta">For Sale</span>
             </motion.h1>
 
             <motion.p
@@ -257,15 +258,15 @@ export default function App() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
             >
-              Koleksi domain eksklusif pilihan untuk bisnis, AI, dan crypto.
-              Beli langsung atau ajukan penawaran terbaik Anda.
+              Exclusive domain collection for business, AI, and crypto. Buy
+              instantly or submit your best offer.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-3 text-sm text-muted-foreground font-mono-code"
+              className="flex flex-wrap justify-center gap-3 text-sm text-muted-foreground font-mono-code mb-10"
             >
               {[
                 "9 Premium Domains",
@@ -280,6 +281,16 @@ export default function App() {
                   {tag}
                 </span>
               ))}
+            </motion.div>
+
+            {/* Search */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="w-full"
+            >
+              <SearchBar />
             </motion.div>
           </div>
         </section>
@@ -315,8 +326,8 @@ export default function App() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Marketplace domain premium terpercaya. Temukan domain impian
-                  Anda dengan harga terbaik.
+                  Your trusted premium domain marketplace. Find your dream
+                  domain at the best price.
                 </p>
               </div>
 
@@ -348,7 +359,7 @@ export default function App() {
               {/* Contact */}
               <div>
                 <h4 className="font-semibold text-sm mb-3 text-foreground">
-                  Kontak
+                  Contact
                 </h4>
                 <div className="flex flex-col gap-2 text-sm text-muted-foreground">
                   <a
@@ -357,7 +368,7 @@ export default function App() {
                   >
                     domains@domainvault.id
                   </a>
-                  <p>Response time: 24 jam</p>
+                  <p>Response time: 24h</p>
                 </div>
               </div>
             </div>

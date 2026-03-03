@@ -76,6 +76,68 @@ export const NEON_STYLES: NeonStyle[] = [
   },
 ];
 
+// Hype levels based on Google search trend simulation
+type HypeLevel = "high" | "medium" | "low";
+
+const HYPE_MAP: Record<string, HypeLevel> = {
+  "InstaPro.ai": "high",
+  "ClawPro.ai": "high",
+  "KongCrypto.com": "high",
+  "TechnoASI.com": "high",
+  "WareLLM.com": "high",
+  "MarketMain.com": "medium",
+  "LayerClaw.com": "medium",
+  "COACloud.com": "low",
+  "Sevotel.com": "low",
+};
+
+function getHypeLevel(domainName: string): HypeLevel {
+  return HYPE_MAP[domainName] ?? "low";
+}
+
+function HypeBadge({
+  level,
+  cardIndex,
+}: {
+  level: HypeLevel;
+  cardIndex: number;
+}) {
+  if (level === "high") {
+    return (
+      <span
+        data-ocid={`domain.hype_badge.${cardIndex}`}
+        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold font-mono-code uppercase tracking-wider"
+        style={{
+          background: "oklch(0.88 0.22 60 / 0.15)",
+          border: "1px solid oklch(0.88 0.22 60 / 0.5)",
+          color: "oklch(0.95 0.18 60)",
+          animation: "hype-badge-pulse 1.6s ease-in-out infinite",
+          boxShadow:
+            "0 0 6px oklch(0.88 0.22 60 / 0.4), 0 0 12px oklch(0.88 0.22 60 / 0.2)",
+        }}
+      >
+        🔥 HOT
+      </span>
+    );
+  }
+  if (level === "medium") {
+    return (
+      <span
+        data-ocid={`domain.hype_badge.${cardIndex}`}
+        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold font-mono-code uppercase tracking-wider"
+        style={{
+          background: "oklch(0.85 0.32 135 / 0.10)",
+          border: "1px solid oklch(0.85 0.32 135 / 0.35)",
+          color: "oklch(0.80 0.22 135)",
+        }}
+      >
+        ⚡ POPULAR
+      </span>
+    );
+  }
+  return null;
+}
+
 function getMarketplaceLinks(domain: Domain) {
   const name = domain.name.toLowerCase();
   return {
@@ -92,24 +154,27 @@ export function DomainCard({ domain, index, neonStyle }: DomainCardProps) {
   const [contactOpen, setContactOpen] = useState(false);
   const cardIndex = index + 1;
   const links = getMarketplaceLinks(domain);
+  const hypeLevel = getHypeLevel(domain.name);
 
   return (
     <>
       <motion.div
         data-ocid={`domain.card.${cardIndex}`}
+        data-domain-name={domain.name}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.07 }}
-        whileHover={{ y: -6, scale: 1.02 }}
+        whileHover={{ y: -8, scale: 1.025 }}
         className={`
           relative rounded-xl border-2 p-5 card-raised cursor-default
-          ${neonStyle.borderClass}
+          neon-border-silver animate-silver-ring
           flex flex-col gap-4
         `}
         style={{
           background:
-            "linear-gradient(145deg, oklch(0.10 0.008 230) 0%, oklch(0.07 0.004 240) 100%)",
+            "linear-gradient(145deg, oklch(0.11 0.006 220) 0%, oklch(0.07 0.003 230) 100%)",
+          borderColor: "oklch(0.85 0.006 220)",
         }}
       >
         {/* Corner accent */}
@@ -118,30 +183,35 @@ export function DomainCard({ domain, index, neonStyle }: DomainCardProps) {
           style={{ background: `var(${neonStyle.cssVar})` }}
         />
 
-        {/* Domain Name */}
-        <div className="flex flex-col gap-1">
-          <div className="flex items-start justify-between gap-2">
-            <h3
-              className={`font-display font-bold text-xl md:text-2xl leading-tight break-all animate-neon-pulse ${neonStyle.textClass}`}
-            >
-              {domain.name}
-            </h3>
-          </div>
+        {/* Domain Name — larger, dominant — always silver */}
+        <div className="flex flex-col gap-1.5">
+          <h3 className="font-display font-black text-2xl md:text-3xl lg:text-4xl leading-tight break-all neon-text-silver animate-silver-shimmer">
+            {domain.name}
+          </h3>
 
-          {/* Registrar */}
-          <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
-            <Building2 className="w-3 h-3 flex-shrink-0" />
-            <span className="font-mono-code">{domain.registrar}</span>
+          {/* Registrar + Hype Badge row */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
+              <Building2 className="w-3 h-3 flex-shrink-0" />
+              <span className="font-mono-code">{domain.registrar}</span>
+            </div>
+            <HypeBadge level={hypeLevel} cardIndex={cardIndex} />
           </div>
         </div>
 
-        {/* Price */}
-        <div className="flex items-baseline gap-1">
-          <Tag className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
-          <span
-            className={`font-display font-extrabold text-2xl tracking-tight ${neonStyle.textClass}`}
-          >
-            ${domain.price.toLocaleString()}
+        {/* Price — centered — always silver */}
+        <div className="flex flex-col items-center justify-center py-2">
+          <div className="flex items-center gap-1.5">
+            <Tag
+              className="w-5 h-5 flex-shrink-0"
+              style={{ color: "var(--neon-silver)", opacity: 0.75 }}
+            />
+            <span className="font-display font-extrabold text-3xl md:text-4xl tracking-tight neon-text-silver animate-silver-shimmer">
+              ${domain.price.toLocaleString()}
+            </span>
+          </div>
+          <span className="text-xs text-muted-foreground font-mono-code mt-0.5 tracking-wider uppercase">
+            USD
           </span>
         </div>
 
@@ -179,14 +249,14 @@ export function DomainCard({ domain, index, neonStyle }: DomainCardProps) {
             Make Offer
           </Button>
 
-          {/* Hubungi Seller */}
+          {/* Contact Seller */}
           <Button
             data-ocid={`domain.contact.open_modal_button.${cardIndex}`}
             variant="ghost"
             className="w-full font-semibold text-sm text-muted-foreground hover:text-foreground border border-border"
             onClick={() => setContactOpen(true)}
           >
-            Hubungi Seller
+            Contact Seller
           </Button>
         </div>
 
